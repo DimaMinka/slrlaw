@@ -13,12 +13,11 @@
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 
-		<?php if( get_theme_mod( 'sg_company' ) != '' ) echo '<div class="sg-company-data"><p>'.wpautop(get_theme_mod( 'sg_company' )).'</p></div>'; ?>
-		<?php if( get_theme_mod( 'sg_copyright' ) != '' ) echo '<div class="sg-copyright"><p>'.( 'sg_copyright' ).'</p></div>'; ?>
+		<?php wp_nav_menu( array( 'theme_location' => 'footer', 'menu_id' => 'footer-menu' ) ); ?>
+
 		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'slrlaw' ) ); ?>"><?php printf( esc_html__( 'Proudly powered by %s', 'slrlaw' ), 'WordPress' ); ?></a>
-			<span class="sep"> | </span>
-			<?php printf( esc_html__( 'Theme: %1$s by %2$s.', 'slrlaw' ), 'slrlaw', '<a href="http://underscores.me/" rel="designer">evgeny</a>' ); ?>
+			<?php if( get_theme_mod( 'sg_copyright' ) != '' ) echo '<div class="sg-copyright"><p>'.get_theme_mod( 'sg_copyright' ).'</p></div>'; ?>
+			<?php if( get_theme_mod( 'sg_company' ) != '' ) echo '<div class="sg-company-data">'.wpautop(get_theme_mod( 'sg_company' )).'</div>'; ?>
 		</div><!-- .site-info -->
 
 

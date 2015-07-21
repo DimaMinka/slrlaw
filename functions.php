@@ -43,6 +43,7 @@ function slrlaw_setup() {
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
 		'primary' => esc_html__( 'Primary Menu', 'slrlaw' ),
+		'footer' => esc_html__('Menu').'-'.__( 'Footer', 'slrlaw' )
 	) );
 
 	/*
