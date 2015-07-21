@@ -13,7 +13,7 @@
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 
-		<?php if( get_theme_mod( 'sg_company' ) != '' ) echo '<div class="sg-company-data"><p>'.str_replace("\n","<br />",get_theme_mod( 'sg_company' )).'</p></div>'; ?>
+		<?php if( get_theme_mod( 'sg_company' ) != '' ) echo '<div class="sg-company-data"><p>'.wpautop(get_theme_mod( 'sg_company' )).'</p></div>'; ?>
 		<?php if( get_theme_mod( 'sg_copyright' ) != '' ) echo '<div class="sg-copyright"><p>'.( 'sg_copyright' ).'</p></div>'; ?>
 		<div class="site-info">
 			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'slrlaw' ) ); ?>"><?php printf( esc_html__( 'Proudly powered by %s', 'slrlaw' ), 'WordPress' ); ?></a>
