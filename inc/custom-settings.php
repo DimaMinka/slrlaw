@@ -106,7 +106,6 @@ function custom_gallery($attr) {
 	if (empty($attachments))
 		return '';
 	$gallery_style = $gallery_div = '';
-	$gallery_div = "<div class='sg-homepage-wrap'>";
 	$output = apply_filters('gallery_style', $gallery_style . "\n\t\t" . $gallery_div);
 	$i = 0;
 	$src_url = '';
@@ -116,22 +115,30 @@ function custom_gallery($attr) {
 		$link = wp_get_attachment_image_src($id, 'medium', false);
 		$output .= sprintf('
 			<div class="sg-home-block home-block-%1$s">
-				<a class="sg-block-thumbnail" href="%2$s">
-					<i class="sg-icons icon-item-%s" style="background-image:url(%3$s);"></i>
-					<h2 class="sg-home-title">%4$s</h2>
+				<a class="sg-block-thumb" href="%2$s">
+					<i class="sg-icons icon-home%s" style="background-image:url(%3$s); width: %6$spx;"></i>
+					<h2 class="sg-block-title">%4$s</h2>
 				</a>
-				<p class="sg-home-desc">
-					<a href="%1$s">%5$s</a>
-				</p>
+				<div class="sg-block-desc">
+				    <a href="%1$s" class="sg-desc-link">
+                        <p class="sg-home-desc">%5$s</p>
+                        <i class="sg-icons icon-left"></i>
+                    </a>
+				</div>
 			</div>',
 			$i,
 			get_post_meta($attachment->ID, '_wp_attachment_image_alt', true),
 			$link[0],
 			$attachment->post_excerpt,
-			$attachment->post_content
+			$attachment->post_content,
+            $link[1] / 2
 		);
 
 	}
-	$output .= "</div>\n";
 	return $output;
+}
+
+add_action( 'init', 'my_add_excerpts_to_pages' );
+function my_add_excerpts_to_pages() {
+    add_post_type_support( 'page', 'excerpt' );
 }

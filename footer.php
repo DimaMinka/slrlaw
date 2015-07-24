@@ -9,22 +9,23 @@
 
 ?>
 
-	</div><!-- #content -->
-
-	<footer id="colophon" class="site-footer" role="contentinfo">
-
-		<?php wp_nav_menu( array( 'theme_location' => 'footer', 'menu_id' => 'footer-menu' ) ); ?>
-
-		<div class="site-info">
-			<?php if( get_theme_mod( 'sg_copyright' ) != '' ) echo '<div class="sg-copyright"><p>'.get_theme_mod( 'sg_copyright' ).'</p></div>'; ?>
-			<?php if( get_theme_mod( 'sg_company' ) != '' ) echo '<div class="sg-company-data">'.wpautop(get_theme_mod( 'sg_company' )).'</div>'; ?>
-		</div><!-- .site-info -->
-
-
-
-	</footer><!-- #colophon -->
-<?php if( get_theme_mod( 'sg_contact' ) != '' ) echo '<div class="sg-contact-left">'.do_shortcode( get_theme_mod( 'sg_contact' ) ).'</div>'; ?>
+        </div><!-- #content -->
+    <?php if( get_theme_mod( 'sg_contact' ) != '' ) echo '<div class="sg-contact-left">'.do_shortcode( get_theme_mod( 'sg_contact' ) ).'</div>'; ?>
+    </div><!-- .main-content -->
 </div><!-- #page -->
+
+<footer id="colophon" class="sg-footer site-footer" role="contentinfo">
+    <div class="sg-foot clearfix">
+        <nav class="sg-footer-nav">
+            <?php wp_nav_menu( array( 'theme_location' => 'footer', 'menu_id' => 'footer-menu', 'menu_class' => 'navigation-list-foot' ) ); ?>
+        </nav>
+
+        <?php if( get_theme_mod( 'sg_copyright' ) != '' ) echo '<div class="sg-copyright"><p>'.get_theme_mod( 'sg_copyright' ).'</p></div>'; ?>
+        <?php if( get_theme_mod( 'sg_company' ) != '' ) echo '<address class="sg-address">'.wpautop(get_theme_mod( 'sg_company' )).'</address>'; ?>
+
+    </div>
+
+</footer><!-- #colophon -->
 
 <?php wp_footer(); ?>
 
