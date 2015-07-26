@@ -7,10 +7,10 @@
 
 ?>
 
-<header class="entry-header">
-	<?php if ( has_post_thumbnail( get_the_ID() ) ) the_post_thumbnail( 'full' ); ?>
-</header>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+	<header class="entry-header">
+		<?php if ( has_post_thumbnail( get_the_ID() ) ) the_post_thumbnail( 'full' ); ?>
+	</header>
 	<div class="entry-content">
 		<?php
 			remove_shortcode('gallery', 'gallery_shortcode');

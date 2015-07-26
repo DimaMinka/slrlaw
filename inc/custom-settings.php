@@ -131,7 +131,7 @@ function custom_gallery($attr) {
 			$link[0],
 			$attachment->post_excerpt,
 			$attachment->post_content,
-            $link[1] / 2
+			$link[1] / 2
 		);
 
 	}
@@ -140,5 +140,5 @@ function custom_gallery($attr) {
 
 add_action( 'init', 'my_add_excerpts_to_pages' );
 function my_add_excerpts_to_pages() {
-    add_post_type_support( 'page', 'excerpt' );
+	add_post_type_support( 'page', 'excerpt' );
 }

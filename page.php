@@ -12,15 +12,18 @@
 
 get_header(); ?>
 
-	<div id="primary" class="content-area variable-content">
-		<main id="main" class="site-main sg-primary" role="main">
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
 
 			<?php while ( have_posts() ) : the_post(); ?>
 
 				<?php
-					if (is_home() || is_front_page()) {
+				global $post;
+				if (is_home() || is_front_page()) {
 						get_template_part( 'template-parts/content', 'home' );
-					} else {
+				} elseif ( is_page( array( 'aboutus' , 27) ) || '27' == $post->post_parent ) {
+						get_template_part( 'template-parts/content', 'page-about' );
+				} else {
 						get_template_part( 'template-parts/content', 'page' );
 					}
 				?>
