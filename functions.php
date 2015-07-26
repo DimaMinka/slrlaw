@@ -39,6 +39,7 @@ function slrlaw_setup() {
 	 * @link http://codex.wordpress.org/Function_Reference/add_theme_support#Post_Thumbnails
 	 */
 	add_theme_support( 'post-thumbnails' );
+    add_image_size( 'sidebar-thumb', 250, 250, true ); // Fixed image size for sidebar area
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
@@ -156,3 +157,8 @@ require get_template_directory() . '/inc/jetpack.php';
  */
 
 require get_template_directory() . '/inc/custom-settings.php';
+
+/**
+ * Metabox additions.
+ */
+require get_stylesheet_directory() . '/inc/metabox.php';

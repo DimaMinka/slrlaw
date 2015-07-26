@@ -24,10 +24,10 @@
 				$k = 0;
 				foreach ($my_excerpt_str as $row) {
 						if (0 == $k && '' != $row) {
-							$output .= "<p class='excerpt_first_row'>$row</p><br>";
+							$output .= "<p class='excerpt_first_row'>$row</p>";
 							$k = 1;
 						}else {
-							$output .= "<span>$row</span><br>";
+							$output .= "$row<br>";
 						}
 
 				}

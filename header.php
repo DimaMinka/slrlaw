@@ -44,7 +44,8 @@
 			</nav><!-- #site-navigation -->
 
 			<!-- Banner-->
-			<!--div class="sg-header-thumb"><?php if ( has_post_thumbnail( get_the_ID() ) ) the_post_thumbnail( 'full' ); ?></div-->
+            <?php  if ((is_home() || is_front_page()) && has_post_thumbnail( get_the_ID() ))
+                    echo '<div class="sg-header-thumb">'.get_the_post_thumbnail(get_the_ID(), 'full' ).'</div>'; ?>
 
 		</header><!-- #masthead -->
 
