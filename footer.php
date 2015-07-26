@@ -9,23 +9,23 @@
 
 ?>
 
-	</div><!-- #content -->
-
-	<footer id="colophon" class="site-footer" role="contentinfo">
-
-		<?php if( get_theme_mod( 'sg_company' ) != '' ) echo '<div class="sg-company-data"><p>'.wpautop(get_theme_mod( 'sg_company' )).'</p></div>'; ?>
-		<?php if( get_theme_mod( 'sg_copyright' ) != '' ) echo '<div class="sg-copyright"><p>'.( 'sg_copyright' ).'</p></div>'; ?>
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'slrlaw' ) ); ?>"><?php printf( esc_html__( 'Proudly powered by %s', 'slrlaw' ), 'WordPress' ); ?></a>
-			<span class="sep"> | </span>
-			<?php printf( esc_html__( 'Theme: %1$s by %2$s.', 'slrlaw' ), 'slrlaw', '<a href="http://underscores.me/" rel="designer">evgeny</a>' ); ?>
-		</div><!-- .site-info -->
-
-
-
-	</footer><!-- #colophon -->
+</div><!-- #content -->
 <?php if( get_theme_mod( 'sg_contact' ) != '' ) echo '<div class="sg-contact-left">'.do_shortcode( get_theme_mod( 'sg_contact' ) ).'</div>'; ?>
+</div><!-- .main-content -->
 </div><!-- #page -->
+
+<footer id="colophon" class="sg-footer site-footer" role="contentinfo">
+	<div class="sg-foot clearfix">
+		<nav class="sg-footer-nav">
+			<?php wp_nav_menu( array( 'theme_location' => 'footer', 'menu_id' => 'footer-menu', 'menu_class' => 'navigation-list-foot' ) ); ?>
+		</nav>
+
+		<?php if( get_theme_mod( 'sg_copyright' ) != '' ) echo '<div class="sg-copyright"><p>'.get_theme_mod( 'sg_copyright' ).'</p></div>'; ?>
+		<?php if( get_theme_mod( 'sg_company' ) != '' ) echo '<address class="sg-address">'.wpautop(get_theme_mod( 'sg_company' )).'</address>'; ?>
+
+	</div>
+
+</footer><!-- #colophon -->
 
 <?php wp_footer(); ?>
 

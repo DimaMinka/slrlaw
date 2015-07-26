@@ -59,3 +59,86 @@ function df_disable_comments_admin_bar() {
 }
 add_action('init', 'df_disable_comments_admin_bar');
 // END Disable support for comments and trackbacks in post types
+
+function custom_gallery($attr) {
+	$post = get_post();
+	static $instance = 0;
+	$instance++;
+	$attr['columns'] = 1;
+	$attr['size'] = 'full';
+	$attr['link'] = 'file';
+	$attr['orderby'] = 'post__in';
+	$attr['include'] = $attr['ids'];
+	$output = apply_filters('post_gallery', '', $attr);
+	if ($output != '')
+		return $output;
+	if (isset($attr['orderby'])) {
+		$attr['orderby'] = sanitize_sql_orderby($attr['orderby']);
+		if (!$attr['orderby'])
+			unset($attr['orderby']);
+	}
+	extract(shortcode_atts(array(
+		'order' => 'ASC',
+		'orderby' => 'menu_order ID',
+		'id' => $post->ID,
+		'itemtag' => 'figure',
+		'icontag' => 'dt',
+		'captiontag' => 'figcaption',
+		'columns' => 3,
+		'size' => 'thumbnail',
+		'include' => '',
+		'exclude' => ''
+	), $attr));
+	$id = intval($id);
+	if ('RAND' == $order)
+		$orderby = 'none';
+	if (!empty($include)) {
+		$_attachments = get_posts(array('include' => $include, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order ID'));
+		$attachments = array();
+		foreach ($_attachments as $key => $val) {
+			$attachments[$val->ID] = $_attachments[$key];
+		}
+	} elseif (!empty($exclude)) {
+		$attachments = get_children(array('post_parent' => $id, 'exclude' => $exclude, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order ID'));
+	} else {
+		$attachments = get_children(array('post_parent' => $id, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order ID'));
+	}
+	if (empty($attachments))
+		return '';
+	$gallery_style = $gallery_div = '';
+	$output = apply_filters('gallery_style', $gallery_style . "\n\t\t" . $gallery_div);
+	$i = 0;
+	$src_url = '';
+	$galleries = '';
+	foreach ($attachments as $id => $attachment) {
+		$i++;
+		$link = wp_get_attachment_image_src($id, 'medium', false);
+		$output .= sprintf('
+			<div class="sg-home-block home-block-%1$s">
+				<a class="sg-block-thumb" href="%2$s">
+					<i class="sg-icons icon-home%s" style="background-image:url(%3$s); width: %6$spx;"></i>
+					<h2 class="sg-block-title">%4$s</h2>
+				</a>
+				<div class="sg-block-desc">
+				    <a href="%1$s" class="sg-desc-link">
+                        <p class="sg-home-desc">%5$s</p>
+                        <i class="sg-icons icon-left"></i>
+                    </a>
+				</div>
+			</div>',
+			$i,
+			get_post_meta($attachment->ID, '_wp_attachment_image_alt', true),
+			$link[0],
+			$attachment->post_excerpt,
+			$attachment->post_content,
+			$link[1] / 2
+		);
+
+	}
+	return $output;
+}
+
+add_action( 'init', 'my_add_excerpts_to_pages' );
+function my_add_excerpts_to_pages() {
+	add_post_type_support( 'page', 'excerpt' );
+}

@@ -17,7 +17,16 @@ get_header(); ?>
 
 			<?php while ( have_posts() ) : the_post(); ?>
 
-				<?php get_template_part( 'template-parts/content', 'page' ); ?>
+				<?php
+				global $post;
+				if (is_home() || is_front_page()) {
+						get_template_part( 'template-parts/content', 'home' );
+				} elseif ( is_page( array( 'aboutus' , 27) ) || '27' == $post->post_parent ) {
+						get_template_part( 'template-parts/content', 'page-about' );
+				} else {
+						get_template_part( 'template-parts/content', 'page' );
+					}
+				?>
 
 				<?php
 					// If comments are open or we have at least one comment, load up the comment template.
