@@ -7,9 +7,6 @@
 
 ?>
 
-<header class="entry-header">
-	<?php if ( has_post_thumbnail( get_the_ID() ) ) the_post_thumbnail( 'full' ); ?>
-</header>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<div class="entry-content">
 		<?php

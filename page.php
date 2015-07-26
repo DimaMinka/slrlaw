@@ -10,35 +10,36 @@
  * @package slrlaw
  */
 
+// Metabox settings
+if(get_post_meta( $post->ID, 'sg-checkbox', true ) != '') {
+    $pagestyle = ' sg-'.get_post_meta( $post->ID, 'sg-checkbox', true ).'-style';
+}
+
 get_header(); ?>
+    <div class="variable-content clearfix<?php echo $pagestyle; ?>">
+        <?php if (!(is_home() || is_front_page())) the_title('<h1 class="sg-page-title">', '</h1>'); ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+        <?php get_sidebar(); ?>
 
-			<?php while ( have_posts() ) : the_post(); ?>
+        <div id="primary" class="content-area sg-primary">
+            <main id="main" class="site-main" role="main">
 
-				<?php
-				global $post;
-				if (is_home() || is_front_page()) {
-						get_template_part( 'template-parts/content', 'home' );
-				} elseif ( is_page( array( 'aboutus' , 27) ) || '27' == $post->post_parent ) {
-						get_template_part( 'template-parts/content', 'page-about' );
-				} else {
-						get_template_part( 'template-parts/content', 'page' );
-					}
-				?>
+                <?php while ( have_posts() ) : the_post(); ?>
 
-				<?php
-					// If comments are open or we have at least one comment, load up the comment template.
-					if ( comments_open() || get_comments_number() ) :
-						comments_template();
-					endif;
-				?>
+                    <?php
+                        if (is_home() || is_front_page()) {
+                            get_template_part( 'template-parts/content', 'home' );
+                        } elseif(get_post_meta( $post->ID, 'sg-cat', true ) != '') {
+                            get_template_part( 'template-parts/content', 'cat' );
+                        } else {
+                            get_template_part( 'template-parts/content', 'page' );
+                        }
+                    ?>
 
-			<?php endwhile; // End of the loop. ?>
+                <?php endwhile; // End of the loop. ?>
 
-		</main><!-- #main -->
-	</div><!-- #primary -->
+            </main><!-- #main -->
+        </div><!-- #primary -->
+	</div>
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>
