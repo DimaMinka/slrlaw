@@ -30,7 +30,15 @@ function prfx_meta_callback( $post ) {
         <input type="radio" name="sg-checkbox" id="sg-checkbox" value="sidebar" <?php if ( isset ( $prfx_stored_meta['sg-checkbox'] ) ) checked( $prfx_stored_meta['sg-checkbox'][0], 'sidebar' ); ?> />
         <span class="prfx-row-title"><?php _e( 'Style' ); ?> - <?php _e( 'Sidebar' ); ?></span><br />
         <input type="radio" name="sg-checkbox" id="sg-checkbox" value="sidebar-menu" <?php if ( isset ( $prfx_stored_meta['sg-checkbox'] ) ) checked( $prfx_stored_meta['sg-checkbox'][0], 'sidebar-menu' ); ?> />
-        <span class="prfx-row-title"><?php _e( 'Style' ); ?> - <?php _e( 'Sidebar' ); ?>-<?php _e( 'Menu' ); ?></span><br />
+        <span class="prfx-row-title"><?php _e( 'Style' ); ?> - <?php _e( 'Sidebar' ); ?>-<?php _e( 'Menu' ); ?> 1</span><br />
+        <input type="radio" name="sg-checkbox" id="sg-checkbox" value="sidebar-menu1" <?php if ( isset ( $prfx_stored_meta['sg-checkbox'] ) ) checked( $prfx_stored_meta['sg-checkbox'][0], 'sidebar-menu1' ); ?> />
+        <span class="prfx-row-title"><?php _e( 'Style' ); ?> - <?php _e( 'Sidebar' ); ?>-<?php _e( 'Menu' ); ?> 2</span><br />
+        <input type="radio" name="sg-checkbox" id="sg-checkbox" value="sidebar-menu2" <?php if ( isset ( $prfx_stored_meta['sg-checkbox'] ) ) checked( $prfx_stored_meta['sg-checkbox'][0], 'sidebar-menu2' ); ?> />
+        <span class="prfx-row-title"><?php _e( 'Style' ); ?> - <?php _e( 'Sidebar' ); ?>-<?php _e( 'Menu' );3 ?> 3</span><br />
+        <input type="radio" name="sg-checkbox" id="sg-checkbox" value="sidebar-menu3" <?php if ( isset ( $prfx_stored_meta['sg-checkbox'] ) ) checked( $prfx_stored_meta['sg-checkbox'][0], 'sidebar-menu3' ); ?> />
+        <span class="prfx-row-title"><?php _e( 'Style' ); ?> - <?php _e( 'Sidebar' ); ?>-<?php _e( 'Menu' ); ?> 4</span><br />
+        <input type="radio" name="sg-checkbox" id="sg-checkbox" value="faq" <?php if ( isset ( $prfx_stored_meta['sg-checkbox'] ) ) checked( $prfx_stored_meta['sg-checkbox'][0], 'faq' ); ?> />
+        <span class="prfx-row-title"><?php _e( 'Style' ); ?> - <?php _e( 'FAQ' ); ?></span><br />
     </p><hr />
     <p>
         <span class="prfx-row-contact"><?php _e( 'Add Custom Field' )?> - <?php _e('Select Category'); ?></span>

@@ -11,18 +11,26 @@
  */
 
 // Metabox settings
-if(get_post_meta( $post->ID, 'sg-checkbox', true ) != '') {
+$sidebar_menu_name = get_post_meta( $post->ID, 'sg-checkbox', true );
+if(is_page() && $sidebar_menu_name == ('sidebar-menu' || 'sidebar-menu1' || 'sidebar-menu2' || 'sidebar-menu3')) {
+    $side_menu = true;
+    $pagestyle = ' sg-sidebar-menu-style';
+}
+
+if(get_post_meta( $post->ID, 'sg-checkbox', true ) != '' && !$side_menu) {
     $pagestyle = ' sg-'.get_post_meta( $post->ID, 'sg-checkbox', true ).'-style';
 }
 
 get_header(); ?>
     <div class="variable-content clearfix<?php echo $pagestyle; ?>">
-        <?php if (!(is_home() || is_front_page())) the_title('<h1 class="sg-page-title">', '</h1>'); ?>
+        <?php if (!(is_home() || is_front_page()) && !$side_menu) the_title('<h1 class="sg-page-title">', '</h1>'); ?>
 
         <?php get_sidebar(); ?>
 
         <div id="primary" class="content-area sg-primary">
             <main id="main" class="site-main" role="main">
+
+                <?php if ($side_menu) the_title('<h1 class="sg-page-title">', '</h1>'); ?>
 
                 <?php while ( have_posts() ) : the_post(); ?>
 

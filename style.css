@@ -1149,7 +1149,7 @@ a, a:before, i:before {
 
 /* About member style */
 
-.sg-sidebar-style {
+.sg-sidebar-style, .sg-sidebar-menu-style {
     padding: 18px 8px 0;
 }
 
@@ -1168,7 +1168,8 @@ a, a:before, i:before {
     width: 100%;
 }
 
-.sg-sidebar-style .sg-primary {
+.sg-sidebar-style .sg-primary,
+.sg-sidebar-menu-style .sg-primary {
     float: left;
     max-width: 625px;
     width: 100%;
@@ -1512,4 +1513,167 @@ a, a:before, i:before {
 
 .hide-text {
     display: none;
+}
+
+/* Sprites */
+
+.icon-side2, .icon-side2h, .icon-side3, .icon-side3h, .icon-side4, .icon-side4h, .icon-faq1, .icon-faq2, .icon-side1, .icon-side1h{
+    background: url(images/sprites-min.png) no-repeat;
+}
+
+.icon-side2{
+    background-position: -100px 0;
+    width: 31px;
+    height: 32px;
+}
+
+.current.icon-side2,
+.icon-side2h{
+    background-position: -100px -49px ;
+    width: 31px;
+    height: 32px;
+}
+
+.icon-side3{
+    background-position: -50px 0;
+    width: 39px;
+    height: 32px;
+}
+
+.current.icon-side3,
+.icon-side3h{
+    background-position: -50px -50px ;
+    width: 39px;
+    height: 32px;
+}
+
+.icon-side4{
+    background-position: 0 0;
+    width: 44px;
+    height: 32px;
+}
+
+.current.icon-side4,
+.icon-side4h{
+    background-position: 0 -49px ;
+    width: 44px;
+    height: 32px;
+}
+
+.icon-faq1{
+    background-position: -200px -50px ;
+    width: 27px;
+    height: 28px;
+}
+
+.icon-faq2{
+    background-position: -200px 0;
+    width: 27px;
+    height: 28px;
+}
+
+.icon-side1{
+    background-position: -150px 0;
+    width: 31px;
+    height: 32px;
+}
+
+.current.icon-side1,
+.icon-side1h{
+    background-position: -150px -49px ;
+    width: 31px;
+    height: 32px;
+}
+
+/* Side subpage menu */
+.sg-widget-subpages {
+
+}
+
+.sg-subpage-icons {
+    border-bottom: 3px solid #b7bac9;
+    text-align: left;
+    padding: 0 0 20px;
+    margin: 0 78px 6px 0;
+}
+
+.sg-subpage-icons .sg-icons {
+    display: inline-block;
+    vertical-align: top;
+    margin: -9px 21px 0 0;
+}
+
+.sg-subpage-icons .sg-icons:first-child {
+    margin-right: 0;
+}
+
+.sg-subpages-nav {
+}
+
+.sg-subpages-list {
+    list-style: none;
+    padding: 0 76px 0 0;
+    margin: 0;
+}
+
+.sub-pages-item {
+    margin: 0 0 0;
+}
+
+.sub-pages-item a {
+    color: #b7bac9;
+    display: block;
+    font-size: 1em;
+    padding: 11px 14px 9px 0;
+}
+
+.sub-pages-item.current a {
+    background-color: #b7bac9;
+    color: #fff;
+}
+
+/* FAQ style */
+
+.sg-faq-post {
+    padding: 17px 82px 0 0;
+    position: relative;
+    margin: 0 0 4px;
+}
+
+.sg-faq-toggler {
+    cursor: pointer;
+}
+
+.sg-faq-post .sg-icons {
+    position: absolute;
+    right: 16px;
+    top: 11px;
+
+}
+
+.sg-faq-title {
+    font-size: 1em;
+    margin: 0px 0 4px;
+
+}
+
+.sg-faq-content {
+    max-height: 0;
+    overflow: hidden;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+
+.active + .sg-faq-content {
+    max-height: 1000px;
+}
+
+
+
+.active .icon-faq1{
+    background-position: -200px 0;
+    width: 27px;
+    height: 28px;
 }

@@ -5,6 +5,8 @@
  * @package slrlaw
  */
 
+$sidebar_menu_name = get_post_meta( get_the_ID(), 'sg-checkbox', true );
+
 if(get_post_meta( get_the_ID(), 'sg-checkbox', true ) == 'sidebar' || is_single()) {
     $my_excerpt = '';
     if ( !is_single() ) {
@@ -23,7 +25,7 @@ if(get_post_meta( get_the_ID(), 'sg-checkbox', true ) == 'sidebar' || is_single(
 
             }
 
-            $my_excerpt = preg_replace('/([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})/', '<a href="mailto:$1">$1</a>', $output).'</p>';
+            $my_excerpt = '<div class="sg-member-info">'.preg_replace('/([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})/', '<a href="mailto:$1">$1</a>', $output).'</p></div>';
         }
     }
 ?>
@@ -33,26 +35,44 @@ if(get_post_meta( get_the_ID(), 'sg-checkbox', true ) == 'sidebar' || is_single(
         <div class="sg-thumb-wrap">
             <div class="sg-thumb-thumb"><?php if ( has_post_thumbnail( get_the_ID() ) ) the_post_thumbnail( 'sidebar-thumb', array('class' => 'sg-member-img', 'alt' => get_the_title() ) ); ?></div>
         </div>
-        <div class="sg-member-info">
         <?php echo $my_excerpt; ?>
-        </div>
     </div>
 </aside>
 
-<?php }
-elseif(get_post_meta( get_the_ID(), 'sg-checkbox', true ) == 'sidebar-menu') {
+<?php
+} elseif(is_page() && $sidebar_menu_name == ('sidebar-menu' || 'sidebar-menu1' || 'sidebar-menu2' || 'sidebar-menu3')) {
 
-    $args = array( 'post_type' => 'page', 'post_parent'=> 27,  'orderby' => 'date', 'order' => 'DESC' );
+    $parent_page = ($post->post_parent ? $post->post_parent : get_the_ID());
+    $current_ID = get_the_ID();
+    $args = array('post_type' => 'page', 'post_parent' => $parent_page, 'orderby' => 'menu_order', 'order' => 'ASC');
+    $myposts = get_posts($args);
 
-    $myposts = get_posts( $args );
-    echo '<ul>';
-    foreach ( $myposts as $post ) : setup_postdata( $post ); ?>
-        <li>
-            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-        </li>
-    <?php endforeach;
-    echo '</ul>';
-    wp_reset_postdata();
-    }
-    ?>
+    foreach ($myposts as $post) : setup_postdata($post);
 
+        $sub_pages .= sprintf('<li class="sub-pages-item%s"><a href="%s">%s</a></li>', ($current_ID == $post->ID ? ' current' : ''), get_permalink(), get_the_title());
+
+    endforeach; wp_reset_postdata();
+
+    printf('
+        <aside class="sg-sidebar">
+            <div class="sg-widget-subpages">
+                <div class="sg-subpage-icons">
+                    <i class="sg-icons icon-side1%1$s"></i>
+                    <i class="sg-icons icon-side2%2$s"></i>
+                    <i class="sg-icons icon-side3%3$s"></i>
+                    <i class="sg-icons icon-side4%4$s"></i>
+                </div>
+                <nav class="sg-subpages-nav">
+                    <ul class="sg-subpages-list%1$s%2$s%3$s%4$s">
+                    %5$s
+                    </ul>
+                </nav>
+            </div>
+        </aside>',
+        ($sidebar_menu_name == 'sidebar-menu' ? ' current color1' : ''),
+        ($sidebar_menu_name == 'sidebar-menu1' ? ' current color2' : ''),
+        ($sidebar_menu_name == 'sidebar-menu2' ? ' current color3' : ''),
+        ($sidebar_menu_name == 'sidebar-menu3' ? ' current color4' : ''),
+        $sub_pages
+    );
+}

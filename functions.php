@@ -120,6 +120,9 @@ function slrlaw_scripts() {
 
 	wp_enqueue_script( 'slrlaw-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
 
+    if (is_page() && get_post_meta( get_the_ID(), 'sg-checkbox', true ) == 'faq')
+	    wp_enqueue_script( 'slrlaw-faq', get_template_directory_uri() . '/js/faq.js', array(), '20150728', true );
+
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
@@ -161,4 +164,4 @@ require get_template_directory() . '/inc/custom-settings.php';
 /**
  * Metabox additions.
  */
-require get_stylesheet_directory() . '/inc/metabox.php';
+require get_template_directory() . '/inc/metabox.php';
