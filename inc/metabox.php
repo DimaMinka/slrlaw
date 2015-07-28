@@ -11,6 +11,7 @@
 
 function prfx_checkbox_meta() {
     add_meta_box( 'prfx_meta', __( 'Personal Options' ), 'prfx_meta_callback', 'page', 'side', 'high' );
+   // add_meta_box( 'prfx_meta', __( 'Personal Options' ), 'prfx_meta_callback', 'post', 'side', 'high' );
 }
 add_action( 'add_meta_boxes', 'prfx_checkbox_meta' );
 
@@ -28,6 +29,8 @@ function prfx_meta_callback( $post ) {
         <span class="prfx-row-title"><?php _e( 'Style' ); ?> - <?php _e( 'General' ); ?></span><br />
         <input type="radio" name="sg-checkbox" id="sg-checkbox" value="sidebar" <?php if ( isset ( $prfx_stored_meta['sg-checkbox'] ) ) checked( $prfx_stored_meta['sg-checkbox'][0], 'sidebar' ); ?> />
         <span class="prfx-row-title"><?php _e( 'Style' ); ?> - <?php _e( 'Sidebar' ); ?></span><br />
+        <input type="radio" name="sg-checkbox" id="sg-checkbox" value="sidebar-menu" <?php if ( isset ( $prfx_stored_meta['sg-checkbox'] ) ) checked( $prfx_stored_meta['sg-checkbox'][0], 'sidebar-menu' ); ?> />
+        <span class="prfx-row-title"><?php _e( 'Style' ); ?> - <?php _e( 'Sidebar' ); ?>-<?php _e( 'Menu' ); ?></span><br />
     </p><hr />
     <p>
         <span class="prfx-row-contact"><?php _e( 'Add Custom Field' )?> - <?php _e('Select Category'); ?></span>

@@ -6,27 +6,29 @@
  */
 
 get_header(); ?>
+<div class="variable-content clearfix sg-sidebar-style">
+	<?php the_title( '<h1 class="sg-page-title">', '</h1>' ); ?>
 
-	<div id="primary" class="content-area">
+	<?php get_sidebar(); ?>
+
+
+	<div id="primary" class="content-area sg-primary">
 		<main id="main" class="site-main" role="main">
 
-		<?php while ( have_posts() ) : the_post(); ?>
+			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+				<header class="entry-header">
 
-			<?php get_template_part( 'template-parts/content', 'single' ); ?>
+						<?php while ( have_posts() ) : the_post(); ?>
 
-			<?php the_post_navigation(); ?>
+							<?php get_template_part( 'template-parts/content', 'single' ); ?>
 
-			<?php
-				// If comments are open or we have at least one comment, load up the comment template.
-				if ( comments_open() || get_comments_number() ) :
-					comments_template();
-				endif;
-			?>
+						<?php endwhile; // End of the loop. ?>
 
-		<?php endwhile; // End of the loop. ?>
+			</article><!-- #post-## -->
 
 		</main><!-- #main -->
 	</div><!-- #primary -->
 
-<?php get_sidebar(); ?>
+</div><!-- .sg-sidebar-style -->
+
 <?php get_footer(); ?>
