@@ -89,6 +89,8 @@ function custom_gallery($attr) {
 		'include' => '',
 		'exclude' => ''
 	), $attr));
+    $id = '';
+    $order = '';
 	$id = intval($id);
 	if ('RAND' == $order)
 		$orderby = 'none';
@@ -113,44 +115,46 @@ function custom_gallery($attr) {
 	foreach ($attachments as $id => $attachment) {
 		$i++;
 		$link = wp_get_attachment_image_src($id, 'medium', false);
-		if(get_post_meta( get_the_ID(), 'sg-checkbox', true ) == 'about' ) {
+        $alt_link = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true);
+        $attach_img = '<img src="'.$link[0].'" />';
+		if(get_post_meta( get_the_ID(), 'sg-checkbox', true ) == 'about') {
 			$output .= sprintf('
-			<div class="sg-home-block home-block-%1$s">
-				<a class="sg-block-thumb" href="%2$s">
-					 <div class="sg-thumb-thumb"><img src="%3$s"></div>
-					<div class="sg-block-title">%4$s</div>
-					<div class="sg-block-title">%5$s</div>
-					<div class="sg-block-title">%6$s</div>
-				</a>
-				</a>
-			</div>',
+                <div class="sg-member-wrap member-block-%1$s">
+                    <div class="sg-member-thumb">
+                        %2$s
+                    </div>
+                    <div class="sg-member-position">
+                        %3$s<h3 class="sg-member-name"><strong>%4$s</strong><span class="sg-member-pos">%5$s</span><span class="sg-member-special">%6$s</span></h3>%7$s
+                    </div>
+                </div>',
 				$i,
-				get_post_meta($attachment->ID, '_wp_attachment_image_alt', true),
-				$link[0],
+                ('' != $alt_link ? '<a class="sg-member-link" href="'.$alt_link.'">'.$attach_img.'</a>' : $attach_img),
+                ('' != $alt_link ? '<a class="sg-member-link" href="'.$alt_link.'">' : ''),
 				$attachment->post_excerpt,
-				$attachment->post_content,
-				$attachment->post_title
+                $attachment->post_content,
+                $attachment->post_title,
+                ('' != $alt_link ? '</a>' : '')
 			);
-		}else {
+		} else {
 			$output .= sprintf('
-			<div class="sg-home-block home-block-%1$s">
-				<a class="sg-block-thumb" href="%2$s">
-					<i class="sg-icons icon-home%s" style="background-image:url(%3$s); width: %6$spx;"></i>
-					<h2 class="sg-block-title">%4$s</h2>
-				</a>
-				<div class="sg-block-desc">
-				    <a href="%1$s" class="sg-desc-link">
-                        <p class="sg-home-desc">%5$s</p>
-                        <i class="sg-icons icon-left"></i>
+                <div class="sg-home-block home-block-%1$s">
+                    <a class="sg-block-thumb" href="%2$s">
+                        <i class="sg-icons icon-home%1$s" %3$s%6$s></i>
+                        <h2 class="sg-block-title">%4$s</h2>
                     </a>
-				</div>
-			</div>',
+                    <div class="sg-block-desc">
+                        <a href="%1$s" class="sg-desc-link">
+                            <p class="sg-home-desc">%5$s</p>
+                            <i class="sg-icons icon-left"></i>
+                        </a>
+                    </div>
+                </div>',
 				$i,
 				get_post_meta($attachment->ID, '_wp_attachment_image_alt', true),
-				$link[0],
+				'style="background-image:url('.$link[0].');',
 				$attachment->post_excerpt,
 				$attachment->post_content,
-				$link[1] / 2
+				'width:'.$link[1] / 2 .'px"'
 			);
 		}
 
@@ -263,3 +267,25 @@ function rd_duplicate_post_link( $actions, $post ) {
 }
 
 add_filter( 'post_row_actions', 'rd_duplicate_post_link', 10, 2 );
+
+function  strip_shortcode_gallery( $content ) {
+    preg_match_all( '/'. get_shortcode_regex() .'/s', $content, $matches, PREG_SET_ORDER );
+    if ( ! empty( $matches ) ) {
+        foreach ( $matches as $shortcode ) {
+            if ( 'gallery' === $shortcode[2] ) {
+                $pos = strpos( $content, $shortcode[0] );
+                if ($pos !== false)
+                    return substr_replace( $content, '', $pos, strlen($shortcode[0]) );
+            }
+        }
+    }
+    return $content;
+}
+
+// add editor the privilege to edit theme
+
+// get the the role object
+$role_object = get_role( 'editor' );
+
+// add $cap capability to this role object
+$role_object->add_cap( 'edit_theme_options' );

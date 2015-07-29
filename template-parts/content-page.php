@@ -10,7 +10,11 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 	<div class="entry-content sg-entry-content">
-		<?php the_content(); ?>
+		<?php
+            $content = strip_shortcode_gallery(get_the_content());
+            $content = str_replace( ']]>', ']]&gt;', apply_filters( 'the_content', $content ) );
+            echo $content;
+        ?>
 
 		<?php
 			if(get_post_meta( get_the_ID(), 'sg-checkbox', true ) == 'about' ) {
@@ -26,7 +30,7 @@
 						$gallery_thumbs .= $gallery;
 					}
 					printf('
-								<div class="sg">
+								<div class="sg-members-grid">
 								%s
 								</div>',
 						$gallery_thumbs
