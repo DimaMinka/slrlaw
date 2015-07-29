@@ -40,7 +40,7 @@ if(get_post_meta( get_the_ID(), 'sg-checkbox', true ) == 'sidebar' || is_single(
 </aside>
 
 <?php
-} elseif(is_page() && $sidebar_menu_name == ('sidebar-menu' || 'sidebar-menu1' || 'sidebar-menu2' || 'sidebar-menu3')) {
+} elseif(is_page() && ($sidebar_menu_name == 'sidebar-menu' || $sidebar_menu_name == 'sidebar-menu1' || $sidebar_menu_name == 'sidebar-menu2' ||  $sidebar_menu_name =='sidebar-menu3')) {
 
     $parent_page = ($post->post_parent ? $post->post_parent : get_the_ID());
     $current_ID = get_the_ID();

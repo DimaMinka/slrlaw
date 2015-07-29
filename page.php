@@ -12,7 +12,7 @@
 
 // Metabox settings
 $sidebar_menu_name = get_post_meta( $post->ID, 'sg-checkbox', true );
-if(is_page() && $sidebar_menu_name == ('sidebar-menu' || 'sidebar-menu1' || 'sidebar-menu2' || 'sidebar-menu3')) {
+if(is_page() && ($sidebar_menu_name == 'sidebar-menu' || $sidebar_menu_name == 'sidebar-menu1' || $sidebar_menu_name == 'sidebar-menu2' ||  $sidebar_menu_name =='sidebar-menu3')) {
     $side_menu = true;
     $pagestyle = ' sg-sidebar-menu-style';
 }

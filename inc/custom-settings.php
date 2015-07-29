@@ -113,7 +113,26 @@ function custom_gallery($attr) {
 	foreach ($attachments as $id => $attachment) {
 		$i++;
 		$link = wp_get_attachment_image_src($id, 'medium', false);
-		$output .= sprintf('
+		if(get_post_meta( get_the_ID(), 'sg-checkbox', true ) == 'about' ) {
+			$output .= sprintf('
+			<div class="sg-home-block home-block-%1$s">
+				<a class="sg-block-thumb" href="%2$s">
+					 <div class="sg-thumb-thumb"><img src="%3$s"></div>
+					<div class="sg-block-title">%4$s</div>
+					<div class="sg-block-title">%5$s</div>
+					<div class="sg-block-title">%6$s</div>
+				</a>
+				</a>
+			</div>',
+				$i,
+				get_post_meta($attachment->ID, '_wp_attachment_image_alt', true),
+				$link[0],
+				$attachment->post_excerpt,
+				$attachment->post_content,
+				$attachment->post_title
+			);
+		}else {
+			$output .= sprintf('
 			<div class="sg-home-block home-block-%1$s">
 				<a class="sg-block-thumb" href="%2$s">
 					<i class="sg-icons icon-home%s" style="background-image:url(%3$s); width: %6$spx;"></i>
@@ -126,13 +145,14 @@ function custom_gallery($attr) {
                     </a>
 				</div>
 			</div>',
-			$i,
-			get_post_meta($attachment->ID, '_wp_attachment_image_alt', true),
-			$link[0],
-			$attachment->post_excerpt,
-			$attachment->post_content,
-			$link[1] / 2
-		);
+				$i,
+				get_post_meta($attachment->ID, '_wp_attachment_image_alt', true),
+				$link[0],
+				$attachment->post_excerpt,
+				$attachment->post_content,
+				$link[1] / 2
+			);
+		}
 
 	}
 	return $output;

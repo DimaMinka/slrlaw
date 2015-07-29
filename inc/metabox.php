@@ -27,7 +27,9 @@ function prfx_meta_callback( $post ) {
         <label for="sg-checkbox"></label>
         <input type="radio" name="sg-checkbox" id="sg-checkbox" value="" <?php if ( isset ( $prfx_stored_meta['sg-checkbox'] ) ) checked( $prfx_stored_meta['sg-checkbox'][0], '' ); ?> />
         <span class="prfx-row-title"><?php _e( 'Style' ); ?> - <?php _e( 'General' ); ?></span><br />
-        <input type="radio" name="sg-checkbox" id="sg-checkbox" value="sidebar" <?php if ( isset ( $prfx_stored_meta['sg-checkbox'] ) ) checked( $prfx_stored_meta['sg-checkbox'][0], 'sidebar' ); ?> />
+        <input type="radio" name="sg-checkbox" id="sg-checkbox" value="about" <?php if ( isset ( $prfx_stored_meta['sg-checkbox'] ) ) checked( $prfx_stored_meta['sg-checkbox'][0], 'about' ); ?> />
+        <span class="prfx-row-title"><?php _e( 'Style' ); ?> - <?php _e( 'About' ); ?></span><br />
+       <input type="radio" name="sg-checkbox" id="sg-checkbox" value="sidebar" <?php if ( isset ( $prfx_stored_meta['sg-checkbox'] ) ) checked( $prfx_stored_meta['sg-checkbox'][0], 'sidebar' ); ?> />
         <span class="prfx-row-title"><?php _e( 'Style' ); ?> - <?php _e( 'Sidebar' ); ?></span><br />
         <input type="radio" name="sg-checkbox" id="sg-checkbox" value="sidebar-menu" <?php if ( isset ( $prfx_stored_meta['sg-checkbox'] ) ) checked( $prfx_stored_meta['sg-checkbox'][0], 'sidebar-menu' ); ?> />
         <span class="prfx-row-title"><?php _e( 'Style' ); ?> - <?php _e( 'Sidebar' ); ?>-<?php _e( 'Menu' ); ?> 1</span><br />
