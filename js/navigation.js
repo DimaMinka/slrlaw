@@ -80,3 +80,27 @@
 	}
 
 } )();
+
+( function($) {
+    $( document ).ready(function() {
+
+        $('#primary-menu > li > .sub-menu').each(function () {
+
+            var subsMenu = $(this).find('.sub-menu');
+
+            $(this).wrap('<ul class="sg-grand-sub" />').after(subsMenu);
+
+        });
+
+        $('.sg-grand-sub .sub-menu').each(function(){
+            $(this).wrapAll('<li class="sg-sub-item" />');
+
+        });
+
+        $('.sg-grand-sub').each(function(){
+            var itemsWidth = $(this).width() + 1;
+            $(this).width(itemsWidth);
+        });
+
+    });
+} )(jQuery);

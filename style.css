@@ -522,26 +522,44 @@ a:active {
 	padding-left: 0;
 }
 
-.main-navigation ul ul {
-	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+.main-navigation .nav-menu > li > ul,
+.main-navigation ul .sg-grand-sub {
 	float: left;
-	position: absolute;
-	top: 1.5em;
+	top: 27px;
 	left: -999em;
 	z-index: 99999;
+	background-color: #fff;
+	padding: 12px 0 0;
+	position: absolute;
+	border-top: 3px solid #b6985a;
 }
 
-.main-navigation ul ul ul {
-	left: -999em;
-	top: 0;
+.main-navigation ul ul li:hover .sub-menu,
+.main-navigation ul ul .sub-menu {
+	left: 0;
+	position: relative;
+	margin: 0;
+	padding: 0;
 }
 
-.main-navigation ul ul a {
-	width: 200px;
+.main-navigation .sub-menu .menu-item {
+	display: block;
+	margin: 0 0 10px;
 }
 
-.main-navigation ul ul li {
+.main-navigation ul ul .menu-item a {
+	color: #b6985a;
+	font-family: Arial;
+	font-weight: normal;
+}
 
+.main-navigation .sg-sub-item {
+	float: right;
+	margin-left: 30px;
+}
+
+.main-navigation .sg-sub-item:first-child {
+	margin-right: 30px;
 }
 
 .main-navigation li:hover > a,
@@ -953,6 +971,16 @@ a, a:before, i:before {
 	vertical-align: top;
 	margin: 0 10px 0;
 	font-size: 1.05em;
+	position: relative;
+}
+
+.main-navigation .nav-menu > .menu-item:before {
+	content: '';
+	height: 50px;
+	left: 0;
+	position: absolute;
+	bottom: -20px;
+	width: 100px;
 }
 
 .main-navigation .menu-item a {
@@ -968,6 +996,10 @@ a, a:before, i:before {
 	left: 0;
 	width: 100%;
 	position: absolute;
+}
+
+.main-navigation .sub-menu .menu-item a:hover:before,  .navigation-list .sub-menu .current-menu-item a:before {
+	bottom: -5px;
 }
 
 /* Homepage style */
@@ -1345,6 +1377,7 @@ a, a:before, i:before {
     filter: alpha(opacity=100);
     opacity: 1;
     position: relative;
+    padding: 0;
 }
 
 /* Side fixed contact form */
@@ -1365,9 +1398,20 @@ a, a:before, i:before {
     width: 55px;
 }
 
+.sg-side-contact:before {
+	background-color: #fff;
+	content: '';
+	height: 205px;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 55px;
+	z-index: 2;
+}
+
 .sg-side-contact:hover {
     padding: 18px 18px 0 0;
-    width: 240px;
+    width: 260px;
 }
 
 .sg-side-title {
@@ -1434,7 +1478,7 @@ a, a:before, i:before {
     display: block;
     float: left;
     height: 43px;
-    margin: -35px 0 0 50px;
+    margin: -35px 0 0 60px;
     position: relative;
     text-indent: -9999px;
     width: 43px;
